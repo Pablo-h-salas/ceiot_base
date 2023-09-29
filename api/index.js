@@ -2,14 +2,31 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const {MongoClient} = require("mongodb");
 const PgMem = require("pg-mem");
+const axios = require('axios');
+
 
 const db = PgMem.newDb();
+
+const apiKey = '70aeee52b8e2152190b25c4f48638414';
+const ciudad = 'Moron,AR';
 
     const render = require("./render.js");
 // Measurements database setup and access
 
+
 let database = null;
 const collectionName = "measurements";
+
+async function getLocalTemperature() {
+    try {
+        const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}`);
+        const temperatura = response.data.main.temp - 273;
+        return temperatura;
+    } catch(error) {
+        console.error('Error al obtener la temperatura:', error);
+        throw error;
+    }
+}
 
 async function startDatabase() {
     const uri = "mongodb://localhost:27017/?maxPoolSize=20&w=majority";	
@@ -41,10 +58,16 @@ app.use(express.static('spa/static'));
 
 const PORT = 8080;
 
-app.post('/measurement', function (req, res) {
--       console.log("device id    : " + req.body.id + " key         : " + req.body.key + " temperature : " + req.body.t + " humidity    : " + req.body.h);	
-    const {insertedId} = insertMeasurement({id:req.body.id, t:req.body.t, h:req.body.h});
-	res.send("received measurement into " +  insertedId);
+app.post('/measurement', async function (req, res) {
+-       console.log("device id    : " + req.body.id + " key         : " + req.body.key + " temperature : " + req.body.t + " humidity    : " + req.body.h);
+	try {
+	    const temperatura = await getLocalTemperature();
+        const {insertedId} = insertMeasurement({id:req.body.id, t:req.body.t, p:req.body.p, timestamp:new Date().toISOString(),tlocal: temperatura.toFixed(2)});
+	    res.send("received measurement into " +  insertedId);
+	} catch(error) {
+	    console.error('Error al obtener la temperatura o insertar la medición:', error);
+        res.status(500).send('Error al procesar la solicitud');
+	}
 });
 
 app.post('/device', function (req, res) {
@@ -116,7 +139,7 @@ startDatabase().then(async() => {
     const addAdminEndpoint = require("./admin.js");
     addAdminEndpoint(app, render);
 
-    await insertMeasurement({id:'00', t:'18', h:'78'});
+    await insertMeasurement({id:'00', t:'24', h:'78'});
     await insertMeasurement({id:'00', t:'19', h:'77'});
     await insertMeasurement({id:'00', t:'17', h:'77'});
     await insertMeasurement({id:'01', t:'17', h:'77'});
