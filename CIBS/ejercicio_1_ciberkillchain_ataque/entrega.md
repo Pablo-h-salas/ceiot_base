@@ -22,24 +22,31 @@ Falsificar datos ambientales para evitar sanciones regulatorias.
 
 # Resolución
 ## Reconnaissance
+[Reconnaissance - TA0043](https://attack.mitre.org/tactics/TA0043/)
   - Buscar puntos debiles en la interfaz web (falta de cifrado, APIs inseguras)
   - Investigar cuáles son los sensores que miden las variables críticas como niveles de gases o radiación.
   - Investigar fallas de seguridad en la base de datos de Google Cloud o en la infraestructura de la plataforma
 ## Weaponization
+[Resource Development - TA0042](https://attack.mitre.org/tactics/TA0042/)
   - crear un malware para modificar para interceptar y modificar los datos que se envian de los sensores a la base de datos.
   - Crear un script para editar los registros de las variables ambientales en tiempo real.
 ## Delivery
+[Initial access - TA0001](https://attack.mitre.org/tactics/TA0001/)
   - Acceso a la interfaz: acceder a la base de datos (si hay inyección SQL vulnerable o autenticacion debil).
   - Acceso al sistema IoT: enviar comandos a los dispositivos IoT para alterar las lecturas.
   - Enviar correos pishing a los administradores del sistema.
 ## Exploit 
+[Execution - TA0002](https://attack.mitre.org/tactics/TA0002/)
   - Modificar la lectura de los sensores críticos una vez que se ha logrado entregar el malware o acceder a la base de datos
   - Manipular los datos en tiempo real mediante la alteracion de las lecturas de los sensores.
   - Desactivar alarmas configuradas.
 ## Installation 
+[Persistence - TA0003](https://attack.mitre.org/tactics/TA0003/)
   -  Instalar backdoors en el servidor web para mantener acceso continuo.
   -  Crear procesos automaticos asegurando que los datos falsificados perduren.
 ## Command & control
+[Command and control - TA0011](https://attack.mitre.org/tactics/TA0011/)
   - Conectar con un servidor C2 (command & control) para continuar con la modificación de los valores reportados.
 ## Actions on Objectives
+[Impact - TA0040](https://attack.mitre.org/tactics/TA0040/)
   - Manipular datos de manera que las autoridades no detecten ninguna anomalia en las mediciones.
