@@ -21,32 +21,61 @@ Además, el sistema permite visualizar estos valores a través de una interfaz w
 Falsificar datos ambientales para evitar sanciones regulatorias.
 
 # Resolución
+
 ## Reconnaissance
 [Reconnaissance - TA0043](https://attack.mitre.org/tactics/TA0043/)
-  - Buscar puntos debiles en la interfaz web (falta de cifrado, APIs inseguras)
-  - Investigar cuáles son los sensores que miden las variables críticas como niveles de gases o radiación.
-  - Investigar fallas de seguridad en la base de datos de Google Cloud o en la infraestructura de la plataforma
+
+[T1598 - Gather Victim Network Information](https://attack.mitre.org/techniques/T1598/):
+Identificar la infraestructura del sistema incluyendo servidores, APIs y bases de datos en la nube.
+
+[T1595 - Active Scanning](https://attack.mitre.org/techniques/T1595/):Buscar puntos debiles en la interfaz web (falta de cifrado, APIs inseguras).
+
+[T1596 - Search Open Technical Databases](https://attack.mitre.org/techniques/T1596/): Investigar la documentacion pública de los sensores utilizados para medir las variables criticas.
+
+[T1589 - Gather Victim Identity Information](https://attack.mitre.org/techniques/T1589/): 
+Identificar usuarios clave que administran la plataforma y puedan ser objetivos de ataques de ingeniería social.
+
 ## Weaponization
 [Resource Development - TA0042](https://attack.mitre.org/tactics/TA0042/)
-  - crear un malware para modificar para interceptar y modificar los datos que se envian de los sensores a la base de datos.
-  - Crear un script para editar los registros de las variables ambientales en tiempo real.
+
+[T1587.001 - Develop Malware](https://attack.mitre.org/techniques/T1587/001/): crear un malware para modificar para interceptar y modificar los datos que se envian de los sensores a la base de datos.
+
+[T1608.001 - Deploy Compromised Software](https://attack.mitre.org/techniques/T1608/001/): Diseñar un script malicioso para editar los registros de las variables ambientales en tiempo real.
+
 ## Delivery
 [Initial access - TA0001](https://attack.mitre.org/tactics/TA0001/)
-  - Acceso a la interfaz: acceder a la base de datos (si hay inyección SQL vulnerable o autenticacion debil).
-  - Acceso al sistema IoT: enviar comandos a los dispositivos IoT para alterar las lecturas.
-  - Enviar correos pishing a los administradores del sistema.
-## Exploit 
+
+[T1190 - Exploit Public-Facing Application](https://attack.mitre.org/techniques/T1190/): acceder a la base de datos (si hay inyección SQL vulnerable o autenticacion debil).
+
+[T1200 - Hardware Additions](https://attack.mitre.org/techniques/T1200/): Intentar inyectar dispositivos maliciosos en la red IoT para alterar lecturas.
+
+[T1566 - Phishing](https://attack.mitre.org/techniques/T1566/): Enviar correos de phishing a administradores del sistema para obtener credenciales de acceso.
+
+## Exploit
 [Execution - TA0002](https://attack.mitre.org/tactics/TA0002/)
-  - Modificar la lectura de los sensores críticos una vez que se ha logrado entregar el malware o acceder a la base de datos
-  - Manipular los datos en tiempo real mediante la alteracion de las lecturas de los sensores.
-  - Desactivar alarmas configuradas.
+
+[T1059.004 - Command and Scripting Interpreter: Unix Shell](https://attack.mitre.org/techniques/T1059/004/): Ejecutar comandos remotos para alterar las lecturas en los sensores.
+
+[T1565.002 - Data Manipulation: Stored Data Manipulation:](https://attack.mitre.org/techniques/T1565/002/): Modificar registros históricos en la base de datos para encubrir anomalías.
+
+    
 ## Installation 
 [Persistence - TA0003](https://attack.mitre.org/tactics/TA0003/)
-  -  Instalar backdoors en el servidor web para mantener acceso continuo.
-  -  Crear procesos automaticos asegurando que los datos falsificados perduren.
+
+[T1505.003 - Server Software Component: Web Shell](https://attack.mitre.org/techniques/T1505/003/): Instalar web shells en el servidor para mantener acceso persistente.
+
+[T1546 - Event Triggered Execution](https://attack.mitre.org/techniques/T1546/):Crear procesos automáticos para modificar datos ambientales periódicamente.
+
+    
 ## Command & control
 [Command and control - TA0011](https://attack.mitre.org/tactics/TA0011/)
-  - Conectar con un servidor C2 (command & control) para continuar con la modificación de los valores reportados.
+
+[T1071.001 - Application Layer Protocol: Web Protocols](https://attack.mitre.org/techniques/T1071/): Conectar con un servidor C2 (command & control) para continuar con la modificación de los valores reportados.
+
 ## Actions on Objectives
 [Impact - TA0040](https://attack.mitre.org/tactics/TA0040/)
-  - Manipular datos de manera que las autoridades no detecten ninguna anomalia en las mediciones.
+
+[T1565.001 - Data Manipulation: Runtime Data Manipulation](https://attack.mitre.org/techniques/T1565/001/): Manipular datos de manera que las autoridades no detecten ninguna anomalia en las mediciones.
+
+[T1485 - Data Destruction](https://attack.mitre.org/techniques/T1485/): Eliminar registros críticos que puedan generar sospechas.
+    
