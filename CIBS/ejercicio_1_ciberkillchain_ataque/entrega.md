@@ -27,13 +27,15 @@ Falsificar datos ambientales para evitar sanciones regulatorias.
 
 [T1598 - Gather Victim Network Information](https://attack.mitre.org/techniques/T1598/):
 Identificar la infraestructura del sistema incluyendo servidores, APIs y bases de datos en la nube.
+Se identifica que el sistema posee una base de datos en Google Cloud y una API REST para la recolección y visualización de datos ambientales.
+Herramienta útil: dirsearch para enumerar rutas del servidor.
 
-[T1595 - Active Scanning](https://attack.mitre.org/techniques/T1595/):Buscar puntos debiles en la interfaz web (falta de cifrado, APIs inseguras).
+[T1595 - Active Scanning](https://attack.mitre.org/techniques/T1595/): Buscar puntos debiles en la interfaz web (falta de cifrado, APIs inseguras).
+Se analiza el dominio de la interfaz web probando endpoints conocidos de la API pública. Se descubre un endpoint vulnerable que no requiere autenticación y es susceptible a inyeccion SQL. 
+Herramienta útil: sqlmap para automatizar la detección de vulnerabilidades de inyección SQL.
 
-[T1596 - Search Open Technical Databases](https://attack.mitre.org/techniques/T1596/): Investigar la documentacion pública de los sensores utilizados para medir las variables criticas.
+La combinación de ambas tecnicas permiten detectar una API vulnerable a inyección SQL que permite acceso no autorizado a la base de datos.  
 
-[T1589 - Gather Victim Identity Information](https://attack.mitre.org/techniques/T1589/): 
-Identificar usuarios clave que administran la plataforma y puedan ser objetivos de ataques de ingeniería social.
 
 ## Weaponization
 [Resource Development - TA0042](https://attack.mitre.org/tactics/TA0042/)
