@@ -13,7 +13,7 @@ Sistema de monitoreo de variables ambientales y alerta temprana
 
 ## Descripción 
 A continuación se presenta una defensa que permita detectar y mitigar el ataque mencionado en el archivo [ciberKillChain-ataque](https://github.com/Pablo-h-salas/ceiot_base/blob/master/CIBS/ejercicio_1_ciberkillchain_ataque/entrega.md).
-Se procede a abordar la defensa en distintas etapas del ataque, comenzando desde la fase final y trabajando hacia atrás.
+Se procede a abordar la defensa en distintas etapas del ataque, comenzando desde la fase final y recorriendo las etapas en sentido inverso.
 
 ## 7 - Actions on Objectives (Acciones sobre los objetivos)
 ### Detección:
@@ -36,24 +36,26 @@ Limitar administradores autorizados. Permitir la instalación de software en los
 
 ## 4 - Exploit (Explotación)
 ### Detección:
-
+Escanear las vulnerabilidades de la API. Usar herramientas (por ejemplo Burp Suite) para identificar vulnerabilidades como intecciones SQL o falta de autenticacion adecuada. 
 ### Mitigación:
-
+Brindar seguridad en la API. Implementar autenticación robusta con herramientas como tokens JWT o certificados TLS. 
 
 ## 3 - Delivery (Entrega)
 ### Detección:
-
+Monitoreo de solicitudes HTTP. Identificar solicitudes maliciosas hacia la API, un WAF (Web Application Firewall) nos permitiria identificar tales solicitudes y bloquear ataques de inyección SQL.
+Además, monitorear el tráfico de red para detectar patrones inusuales que puedan indicar un ataque.
 ### Mitigación:
-
+Filtrado de tráfico. Configurar un WAF para bloquear solicitudes maliciosas y limitar la cantidad de peticiones hacia la API en un intervalo de corta duración.
 
 ## 2- Weaponization (Armamento)
 ### Detección:
-
+Analisis de script maliciosos. Escanear cualquier script o archivo que se suba a los servidores. Herramientas como ClamAV pueden identificar patrones asociados a malware o scripts maliciosos.
 ### Mitigación:
-
+Ejecutar exclusivamente script autorizados. Herramientas de whitelisting de aplciaciones nos ayudan a prevenir la ejecución de cualquier script que no haya sido previamente autorizado. Esto evita que cualquier script malicioso sea ejecutado en los servidores.
 
 ## 1- Reconnaissance (Reconocimiento)
 ### Detección:
-
+Emplear monitores de escaneos de red. Implementar herramientas (por ejemplo Fail2Ban o Snort) para detectar escaneos de red o intentos de enumeración de rutas en el servidor. 
+Generar alertas cuando se detecten patrones de escaneo o exploración de recursos.
 ### Mitigación:
-
+Restricciones de acceso. Implementar firewalls y VPNs para restringir el acceso a recursos internos solo a direcciones IP conocidas. Limitar los servicios expuestos a los mínimos necesarios.
