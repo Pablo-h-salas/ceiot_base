@@ -55,16 +55,17 @@ La combinación de ambas técnicas permiten detectar una API vulnerable a inyecc
 Se desarrolla un script en Python que automatiza la explotación de la API vulnerable, permitiendo modificar los valores reportados por los sensores en la base de datos.
 El script incluye un bloque de código para sobreescribir registros de CO2, PH de agua residual y otros valores clave en tiempo real.
 
+
 ## Delivery
 [Initial access - TA0001](https://attack.mitre.org/tactics/TA0001/)
 
-#### Técnicas utilizadas
+#### Técnica utilizada
 
 [T1190 - Exploit Public-Facing Application](https://attack.mitre.org/techniques/T1190/): acceder a la base de datos (si hay inyección SQL vulnerable o autenticacion debil).
 
-[T1200 - Hardware Additions](https://attack.mitre.org/techniques/T1200/): Intentar inyectar dispositivos maliciosos en la red IoT para alterar lecturas.
+#### Descripción 
+Se utiliza un script de Python para enviar peticiones de HTTP a la API REST identificada durante la fase de reconocimiento. El endpoint (por ejemplo: /update_sensor/data) permite recibir parámetros como sensor_id, valor, y timestamp sin validación ni autenticación.
 
-[T1566 - Phishing](https://attack.mitre.org/techniques/T1566/): Enviar correos de phishing a administradores del sistema para obtener credenciales de acceso.
 
 ## Exploit
 [Execution - TA0002](https://attack.mitre.org/tactics/TA0002/)
