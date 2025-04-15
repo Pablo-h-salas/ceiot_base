@@ -1,15 +1,57 @@
 # Ejercicio CiberKillChain - Defensa
 
-Hacer una copia de este documento para utilizar com plantilla para el ejercicio
 
 ## Alumno
 
-(completar)
+Pablo Horacio Salas
 
-## Enunciado
+## Sistema
 
-Desarrollar la defensa en función del ataque planteado en orden inverso, mencionar una medida de detección y una de mitigación, sólo lo más importante, considerar recursos limitados. No es una respuesta a un incidente, hay que detectar el ataque independientemente de la etapa.
-
+Sistema de monitoreo de variables ambientales y alerta temprana
 
 ## Resolución
+
+## Descripción 
+A continuación se presenta una defensa que permita detectar y mitigar el ataque mencionado en el archivo [ciberKillChain-ataque](https://github.com/Pablo-h-salas/ceiot_base/blob/master/CIBS/ejercicio_1_ciberkillchain_ataque/entrega.md).
+Se procede a abordar la defensa en distintas etapas del ataque, comenzando desde la fase final y trabajando hacia atrás.
+
+## 7 - Actions on Objectives (Acciones sobre los objetivos)
+### Detección:
+
+### Mitigación:
+
+## 6 - Command & control (Mando y control)
+### Detección:
+
+### Mitigación:
+
+
+## 5 - Installation (Instalación)
+### Detección:
+
+### Mitigación:
+
+
+## 4 - Exploit (Explotación)
+### Detección:
+
+### Mitigación:
+
+
+## 3 - Delivery (Entrega)
+### Detección:
+
+### Mitigación:
+
+
+## 2- Weaponization (Armamento)
+### Detección:
+
+### Mitigación:
+
+
+## 1- Reconnaissance (Reconocimiento)
+### Detección:
+
+### Mitigación:
 
