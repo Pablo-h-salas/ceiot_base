@@ -43,8 +43,9 @@ La combinación de ambas técnicas permiten detectar una API vulnerable a inyecc
 
 ## 2- Weaponization (Armamento)
 
-#### Técnicas utilizadas
 [Resource Development - TA0042](https://attack.mitre.org/tactics/TA0042/)
+
+#### Técnicas utilizadas
 
 [T1587.001 - Develop Malware](https://attack.mitre.org/techniques/T1587/001/): crear un malware para modificar para interceptar y modificar los datos que se envian de los sensores a la base de datos.
 
