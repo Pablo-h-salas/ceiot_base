@@ -22,7 +22,7 @@ Falsificar datos ambientales para evitar sanciones regulatorias.
 
 # Resolución
 
-## Reconnaissance
+## Reconnaissance (Reconocimiento)
 [Reconnaissance - TA0043](https://attack.mitre.org/tactics/TA0043/)
 
 #### Técnicas utilizadas
@@ -41,7 +41,7 @@ Herramienta útil: sqlmap para automatizar la detección de vulnerabilidades de 
 La combinación de ambas técnicas permiten detectar una API vulnerable a inyección SQL que permite acceso no autorizado a la base de datos.  
 
 
-## Weaponization
+## Weaponization (Armamento)
 
 #### Técnicas utilizadas
 [Resource Development - TA0042](https://attack.mitre.org/tactics/TA0042/)
@@ -56,7 +56,7 @@ Se desarrolla un script en Python que automatiza la explotación de la API vulne
 El script incluye un bloque de código para sobreescribir registros de CO2, PH de agua residual y otros valores clave en tiempo real.
 
 
-## Delivery
+## Delivery (Entrega)
 [Initial access - TA0001](https://attack.mitre.org/tactics/TA0001/)
 
 #### Técnica utilizada
@@ -67,15 +67,17 @@ El script incluye un bloque de código para sobreescribir registros de CO2, PH d
 Se utiliza un script de Python para enviar peticiones de HTTP a la API REST identificada durante la fase de reconocimiento. El endpoint (por ejemplo: /update_sensor/data) permite recibir parámetros como sensor_id, valor, y timestamp sin validación ni autenticación.
 
 
-## Exploit
+## Exploit (Explotación)
 [Execution - TA0002](https://attack.mitre.org/tactics/TA0002/)
 
-[T1059.004 - Command and Scripting Interpreter: Unix Shell](https://attack.mitre.org/techniques/T1059/004/): Ejecutar comandos remotos para alterar las lecturas en los sensores.
+#### Técnica utilizada
 
-[T1565.002 - Data Manipulation: Stored Data Manipulation:](https://attack.mitre.org/techniques/T1565/002/): Modificar registros históricos en la base de datos para encubrir anomalías.
+[CWE-89 – SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
 
+#### Descripción 
+Una vez recibido el contenido del ataque, el sistema vulnerable lo procesa ejecutando directamente el código SQL incluido en los parametros. Esto permite al atacante acceder, modificar o eliminar datos de la base de datos sin autorización.
     
-## Installation 
+## Installation (Instalación)
 [Persistence - TA0003](https://attack.mitre.org/tactics/TA0003/)
 
 [T1505.003 - Server Software Component: Web Shell](https://attack.mitre.org/techniques/T1505/003/): Instalar web shells en el servidor para mantener acceso persistente.
@@ -83,12 +85,12 @@ Se utiliza un script de Python para enviar peticiones de HTTP a la API REST iden
 [T1546 - Event Triggered Execution](https://attack.mitre.org/techniques/T1546/):Crear procesos automáticos para modificar datos ambientales periódicamente.
 
     
-## Command & control
+## Command & control (Mando y control)
 [Command and control - TA0011](https://attack.mitre.org/tactics/TA0011/)
 
 [T1071.001 - Application Layer Protocol: Web Protocols](https://attack.mitre.org/techniques/T1071/): Conectar con un servidor C2 (command & control) para continuar con la modificación de los valores reportados.
 
-## Actions on Objectives
+## Actions on Objectives (Acciones sobre los objetivos)
 [Impact - TA0040](https://attack.mitre.org/tactics/TA0040/)
 
 [T1565.001 - Data Manipulation: Runtime Data Manipulation](https://attack.mitre.org/techniques/T1565/001/): Manipular datos de manera que las autoridades no detecten ninguna anomalia en las mediciones.
