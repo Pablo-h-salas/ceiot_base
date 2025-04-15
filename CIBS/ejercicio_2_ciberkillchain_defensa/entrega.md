@@ -24,15 +24,15 @@ Validación de datos. Implementar validación de datos en la API, asegurando que
 
 ## 6 - Command & control (Mando y control)
 ### Detección:
-
+Análisis de tráfico de red. Herramientas como Wireshark ayudan a identificar patrones de tráfico inusuales o conexiones a servidores externos C2. 
 ### Mitigación:
-
+Bloqueo de IPs no autorizadas. Asegurar que la comunicación solo se permita entre nodos conocidos y confiables. Para ello se deberia bloquear todas las IPs no autorizadas, redirigiendo el tráfico hacia una red de aislamiento si es necesario.
 
 ## 5 - Installation (Instalación)
 ### Detección:
-
+Monitoreo de procesos/tareas. Herramientas como Auditd permiten identificar que proceso se ejecutó, cuando y que tarea de realizó (borrar, modificar, leer). Esto puede ser muy util para detectar la instalacion de software malicioso como web shells. 
 ### Mitigación:
-
+Limitar administradores autorizados. Permitir la instalación de software en los servidores criticos solo a los administradores autorizados. Se deberá bloquear la ejecución de programas no autorizados y revisar los permisos regularmente para prevenir accesos no autorizados.
 
 ## 4 - Exploit (Explotación)
 ### Detección:
