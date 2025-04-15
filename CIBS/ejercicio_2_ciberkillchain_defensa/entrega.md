@@ -17,8 +17,10 @@ Se procede a abordar la defensa en distintas etapas del ataque, comenzando desde
 
 ## 7 - Actions on Objectives (Acciones sobre los objetivos)
 ### Detección:
-
+Monitoreo de cambios en la base de datos. Herramientas como Prometheus o ELK stack supervisan continuamente los registros en la base de datos, permitiendo detectar cambios inusuales o modificaciones en los datos.
+Por otro lado el sistema puede configurarse para verificar si los datos que están siendo almacenados en la base de datos coinciden con lo que se espera.
 ### Mitigación:
+Validación de datos. Implementar validación de datos en la API, asegurando que los valores recibidos sean consistentes con las mediciones físicas reales. Si los valores no coinciden, se puede bloquear el acceso a la base de datos o generar una alerta para la intervención de administradores.
 
 ## 6 - Command & control (Mando y control)
 ### Detección:
