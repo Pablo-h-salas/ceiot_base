@@ -22,7 +22,7 @@ Falsificar datos ambientales para evitar sanciones regulatorias.
 
 # Resolución
 
-## Reconnaissance (Reconocimiento)
+## 1- Reconnaissance (Reconocimiento)
 [Reconnaissance - TA0043](https://attack.mitre.org/tactics/TA0043/)
 
 #### Técnicas utilizadas
@@ -38,10 +38,10 @@ Se analiza el dominio de la interfaz web probando endpoints conocidos de la API 
 Herramienta útil: sqlmap para automatizar la detección de vulnerabilidades de inyección SQL.
 
 #### Descripción 
-La combinación de ambas técnicas permiten detectar una API vulnerable a inyección SQL que permite acceso no autorizado a la base de datos.  
+La combinación de ambas técnicas permiten detectar una API vulnerable a inyección SQL que permite acceso no autorizado a la base de datos de registros ambientales.  
 
 
-## Weaponization (Armamento)
+## 2- Weaponization (Armamento)
 
 #### Técnicas utilizadas
 [Resource Development - TA0042](https://attack.mitre.org/tactics/TA0042/)
@@ -56,7 +56,7 @@ Se desarrolla un script en Python que automatiza la explotación de la API vulne
 El script incluye un bloque de código para sobreescribir registros de CO2, PH de agua residual y otros valores clave en tiempo real.
 
 
-## Delivery (Entrega)
+## 3 - Delivery (Entrega)
 [Initial access - TA0001](https://attack.mitre.org/tactics/TA0001/)
 
 #### Técnica utilizada
@@ -64,10 +64,10 @@ El script incluye un bloque de código para sobreescribir registros de CO2, PH d
 [T1190 - Exploit Public-Facing Application](https://attack.mitre.org/techniques/T1190/): acceder a la base de datos (si hay inyección SQL vulnerable o autenticacion debil).
 
 #### Descripción 
-Se utiliza un script de Python para enviar peticiones de HTTP a la API REST identificada durante la fase de reconocimiento. El endpoint (por ejemplo: /update_sensor/data) permite recibir parámetros como sensor_id, valor, y timestamp sin validación ni autenticación.
+Se utiliza un script de Python para **enviar peticiones de HTTP** a la API REST identificada durante la fase de reconocimiento. El endpoint (por ejemplo: /update_sensor/data) permite recibir parámetros como sensor_id, valor, y timestamp sin validación ni autenticación.
 
 
-## Exploit (Explotación)
+## 4 - Exploit (Explotación)
 [Execution - TA0002](https://attack.mitre.org/tactics/TA0002/)
 
 #### Técnica utilizada
@@ -75,25 +75,45 @@ Se utiliza un script de Python para enviar peticiones de HTTP a la API REST iden
 [CWE-89 – SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
 
 #### Descripción 
-Una vez recibido el contenido del ataque, el sistema vulnerable lo procesa ejecutando directamente el código SQL incluido en los parametros. Esto permite al atacante acceder, modificar o eliminar datos de la base de datos sin autorización.
+Se aprovecha la falta de verificación en los parametros de la API, se logra ejecutar instrucciones SQL directamente contra la base de datos. Esto permite al atacante acceder, modificar o eliminar datos de la base de datos sin autorización.
+
     
-## Installation (Instalación)
+## 5 - Installation (Instalación)
 [Persistence - TA0003](https://attack.mitre.org/tactics/TA0003/)
+#### Técnicas utilizadas
 
 [T1505.003 - Server Software Component: Web Shell](https://attack.mitre.org/techniques/T1505/003/): Instalar web shells en el servidor para mantener acceso persistente.
 
 [T1546 - Event Triggered Execution](https://attack.mitre.org/techniques/T1546/):Crear procesos automáticos para modificar datos ambientales periódicamente.
 
+#### Descripción 
+Se sube una web shell (por ejemplo shell.php) mediante un endpoint debilmente protegido, lo que permite volver a acceder al servidor cuando sea necesario.
+Se programa **tareas cron** en el servidor (servicio del sitema operativo que ejecuta comandos en segundo plano a una hora y frecuencia determinada).
+El uso de estas 2 técnicas asegura que incluso si se reinicia el sistema, las manipulaciones continúen.
     
-## Command & control (Mando y control)
+## 6 - Command & control (Mando y control)
 [Command and control - TA0011](https://attack.mitre.org/tactics/TA0011/)
 
-[T1071.001 - Application Layer Protocol: Web Protocols](https://attack.mitre.org/techniques/T1071/): Conectar con un servidor C2 (command & control) para continuar con la modificación de los valores reportados.
+#### Técnica utilizada
+[T1071.001 - Application Layer Protocol: Web Protocols](https://attack.mitre.org/techniques/T1071/):uso de protocolos web (como HTTP/HTTPS) para la comunicación de comando y control (C2)
 
-## Actions on Objectives (Acciones sobre los objetivos)
+#### Descripción 
+Se configura el script para que se comunique con un servidor HTTP que se controla desde una computadora personal, para que este servidor sea accesible desde internet se podria usar una herramienta como nrgok.
+El servidor HTTP aloja un conjunto de respuestas predefinidas con datos ambientales falsificados.
+El script malicioso que interactúa con la API vulnerable está programado para obtener periódicamente estos valores falsos desde el servidor HTTP, simulando datos reales.
+De esta forma se mantiene control constante sobre lo valores que se reportan al sistema. 
+
+## 7 - Actions on Objectives (Acciones sobre los objetivos)
 [Impact - TA0040](https://attack.mitre.org/tactics/TA0040/)
+
+#### Técnicas utilizadas
 
 [T1565.001 - Data Manipulation: Runtime Data Manipulation](https://attack.mitre.org/techniques/T1565/001/): Manipular datos de manera que las autoridades no detecten ninguna anomalia en las mediciones.
 
 [T1485 - Data Destruction](https://attack.mitre.org/techniques/T1485/): Eliminar registros críticos que puedan generar sospechas.
+
+#### Descripción 
+
+A través de la explotación de la API REST vulnerada, se modifica y falsifica los datos ambientales que se registran en el sistema. Estos datos manipulados son enviados a la base de datos y a la interfaz de usuario para que parezcan normales, evitando que se disparen alertas por condiciones peligrosas. Además, elimina registros históricos para que no queden rastros de las manipulaciones pasadas.
+Estas acciones permiten engañar al sistema de monitoreo y las autoridades reguladoras, haciendo que el sistema parezca estar dentro de los parámetros legales y no dispare alertas a las entidades que verifican los datos.
     
