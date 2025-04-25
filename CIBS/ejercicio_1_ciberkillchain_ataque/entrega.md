@@ -50,11 +50,12 @@ La combinación de ambas técnicas permiten detectar una API vulnerable a inyecc
 [T1587.001 - Develop Malware](https://attack.mitre.org/techniques/T1587/001/): crear un malware para modificar para interceptar y modificar los datos que se envian de los sensores a la base de datos.
 
 
-[T1608.001 - Deploy Compromised Software](https://attack.mitre.org/techniques/T1608/001/): Diseñar un script malicioso para editar los registros de las variables ambientales en tiempo real.
+[T1608.001 - Upload Malware](https://attack.mitre.org/techniques/T1608/001/): subir software malicioso a un lugar controlado por el atacante. 
 
 #### Descripción 
 Se desarrolla un script en Python que automatiza la explotación de la API vulnerable, permitiendo modificar los valores reportados por los sensores en la base de datos.
 El script incluye un bloque de código para sobreescribir registros de CO2, PH de agua residual y otros valores clave en tiempo real.
+Se utiliza una VPS (virtual private server) para tener una posicion de ataque anonima.
 
 
 ## 3 - Delivery (Entrega)
