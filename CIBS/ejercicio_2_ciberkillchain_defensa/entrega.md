@@ -36,7 +36,9 @@ Limitar administradores autorizados. Permitir la instalación de software en los
 
 ## 4 - Exploit (Explotación)
 ### Detección:
-Escanear las vulnerabilidades de la API. Usar herramientas (por ejemplo Burp Suite) para identificar vulnerabilidades como intecciones SQL o falta de autenticacion adecuada. 
+// Escanear las vulnerabilidades de la API. Usar herramientas (por ejemplo Burp Suite) para identificar vulnerabilidades como inyecciones SQL o falta de autenticacion adecuada. 
+Para detectar la explotacion se podria revisar los logs del servidor web, para registrar la IP solicitante, que endpoint se llamó y parametros se pasaron. 
+un sistema de detección de intrusos (IDS) tambien nos ayudaria ya que alerta anomalias en la red, como patrones repetitivos. 
 ### Mitigación:
 Brindar seguridad en la API. Implementar autenticación robusta con herramientas como tokens JWT o certificados TLS. 
 
@@ -49,8 +51,12 @@ Filtrado de tráfico. Configurar un WAF para bloquear solicitudes maliciosas y l
 
 ## 2- Weaponization (Armamento)
 ### Detección:
-Analisis de script maliciosos. Escanear cualquier script o archivo que se suba a los servidores. Herramientas como ClamAV pueden identificar patrones asociados a malware o scripts maliciosos.
+En esta fase el atacante aun no envia nada, no se puede ver ni detectar nada aún.
+
 ### Mitigación:
+limitar las vulnerabilidades: Esto se podria lograr encaneando el sistema frecuentemente en busca de fallas (como nikto para detectar configuraciones debiles en servidores web).
+listar que puertos y servicios estan expuestos. 
+Actualizar y parchear dependencias. 
 Ejecutar exclusivamente script autorizados. Herramientas de whitelisting de aplciaciones nos ayudan a prevenir la ejecución de cualquier script que no haya sido previamente autorizado. Esto evita que cualquier script malicioso sea ejecutado en los servidores.
 
 ## 1- Reconnaissance (Reconocimiento)
